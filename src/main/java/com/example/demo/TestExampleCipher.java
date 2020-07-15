@@ -20,7 +20,7 @@ public class TestExampleCipher {
             ClassLoader.getSystemClassLoader().loadClass(BouncyCastleMapper.getClassName(BouncyCastleMapper.AEADBlockCipher));
             Security.addProvider((Provider)Class.forName(BouncyCastleMapper.getClassName(BouncyCastleMapper.BouncyCastleProvider)).newInstance());
         } catch (Exception var1) {
-            throw new RuntimeException(); // our request getting exception at this line.
+            throw new RuntimeException(var1); // our request getting exception at this line.
         }
     }
 }
