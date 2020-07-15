@@ -26,9 +26,11 @@ public class HelloController {
     }
 
     @RequestMapping("/testProvider")
-    public String bouncyCastleProvider() {
+    public String bouncyCastleProvider() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         // Security.addProvider((Provider) Class.forName(BouncyCastleMapper.getClassName(BouncyCastleMapper.BouncyCastleProvider)).newInstance());
-        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+       // Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+       // Security.addProvider((Provider)Class.forName(BouncyCastleMapper.getClassName(BouncyCastleMapper.BouncyCastleProvider)).newInstance());
+       TestExampleCipher.init();
         String providerName = "BC";
         String returnString="";
         if (Security.getProvider(providerName) == null) {
@@ -43,8 +45,10 @@ public class HelloController {
     }
 
     @RequestMapping("/listBC")
-    public String listBCCapabilities() {
-        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+    public String listBCCapabilities() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+       // Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+       // Security.addProvider((Provider)Class.forName(BouncyCastleMapper.getClassName(BouncyCastleMapper.BouncyCastleProvider)).newInstance());
+       TestExampleCipher.init();
         Provider provider = Security.getProvider("BC");
         System.out.println("cryptoLearn.listBCCapabilities:"+provider.getInfo());
         StringBuffer st = new StringBuffer();
@@ -72,7 +76,10 @@ public class HelloController {
     public String testInitialise()
             throws Exception
     {
-        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+        //Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+      //  Security.addProvider((Provider)Class.forName(BouncyCastleMapper.getClassName(BouncyCastleMapper.BouncyCastleProvider)).newInstance());
+        TestExampleCipher.init();
+
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DH", "BC");
 
         keyGen.initialize(512);
@@ -87,8 +94,10 @@ public class HelloController {
     public String testSmallSecret()
             throws Exception
     {
-        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
-        bouncyCastleProvider();
+        //Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+       // Security.addProvider((Provider)Class.forName(BouncyCastleMapper.getClassName(BouncyCastleMapper.BouncyCastleProvider)).newInstance());
+        //bouncyCastleProvider();
+        TestExampleCipher.init();
         BigInteger p = new BigInteger("ff3b512a4cc0961fa625d6cbd9642c377ece46b8dbc3146a98e0567f944034b5e3a1406edb179a77cd2539bdb74dc819f0a74d486606e26e578ff52c5242a5ff", 16);
         BigInteger g = new BigInteger("58a66667431136e99d86de8199eb650a21afc9de3dd4ef9da6dfe89c866e928698952d95e68b418becef26f23211572eebfcbf328809bdaf02bba3d24c74f8c0", 16);
 
