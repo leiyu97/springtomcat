@@ -24,10 +24,13 @@ public class Application {
             System.out.println("Let's inspect the beans provided by Spring Boot:");
 
             String[] beanNames = ctx.getBeanDefinitionNames();
+            System.out.println("************* start *******************");
             Arrays.sort(beanNames);
             for (String beanName : beanNames) {
                 System.out.println(beanName);
             }
+            System.out.println("******************************");
+            printWelcome();
             readFromPropertiesFile();
         };
     }
@@ -43,6 +46,10 @@ public class Application {
             ioException.printStackTrace();
         }
 
+    }
+
+    public  void printWelcome() {
+        System.out.println("This is to check if the build is taking the new code");
     }
 
 }
