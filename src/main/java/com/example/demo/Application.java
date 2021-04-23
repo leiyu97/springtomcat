@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Properties;
@@ -42,29 +43,32 @@ public class Application {
             }
 
             printWelcome();
-            //readFromPropertiesFile();
+            readFromPropertiesFile();
         };
     }
 
 
-    /*public void readFromPropertiesFile() {
+    public void readFromPropertiesFile() {
         Properties prop = new Properties();
         try {
 
             String propsLocation = System.getenv("CONFIG_LOCATION");
+            System.out.println("propsLocation is "+ propsLocation);
            // prop.load(Application.class.getClassLoader().getResourceAsStream("deploy.properties"));
-
+            FileInputStream fis = new FileInputStream(propsLocation+"/deploy.properties");
+            prop.load(fis);
             System.out.println("**** properties content is "+ prop.getProperty("test"));
 
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
 
-    }*/
+    }
 
     public  void printWelcome() {
         System.out.println("This is to check if the build is taking the new code");
         System.out.println("****"+ env.getProperty("test"));
+        //env.
     }
 
 }
