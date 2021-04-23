@@ -1,6 +1,8 @@
 package com.example.demo;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Properties;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,8 +28,21 @@ public class Application {
             for (String beanName : beanNames) {
                 System.out.println(beanName);
             }
-
+            readFromPropertiesFile();
         };
+    }
+
+    public void readFromPropertiesFile() {
+        Properties prop = new Properties();
+        try {
+            prop.load(Application.class.getClassLoader().getResourceAsStream("deploy.properties"));
+
+            System.out.println("**** properties content is "+ prop.getProperty("test"));
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
     }
 
 }

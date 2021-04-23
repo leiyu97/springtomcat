@@ -31,6 +31,7 @@ public class HelloController {
        // Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
        // Security.addProvider((Provider)Class.forName(BouncyCastleMapper.getClassName(BouncyCastleMapper.BouncyCastleProvider)).newInstance());
        TestExampleCipher.init();
+       int count=0;
         String providerName = "BC";
         String returnString="";
         if (Security.getProvider(providerName) == null) {
@@ -41,7 +42,7 @@ public class HelloController {
             returnString="BC provider is installed";
         }
 
-        return returnString +"\n";
+        return returnString + count++ +"\n";
     }
 
     @RequestMapping("/listBC")
