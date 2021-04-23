@@ -9,8 +9,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
+@PropertySource("file:///${CONFIG_LOCATION}/deploy.properties")
 public class Application {
 
     public static void main(String[] args) {
@@ -24,16 +26,16 @@ public class Application {
             System.out.println("Let's inspect the beans provided by Spring Boot:");
 
             String[] beanNames = ctx.getBeanDefinitionNames();
-            System.out.println("************* start *******************");
             Arrays.sort(beanNames);
             for (String beanName : beanNames) {
                 System.out.println(beanName);
             }
-            System.out.println("******************************");
+
             printWelcome();
             readFromPropertiesFile();
         };
     }
+
 
     public void readFromPropertiesFile() {
         Properties prop = new Properties();
