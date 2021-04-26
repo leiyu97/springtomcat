@@ -44,6 +44,7 @@ public class Application {
 
             printWelcome();
             readFromPropertiesFile();
+            readFromPropFileFromClasspath();
         };
     }
 
@@ -53,11 +54,12 @@ public class Application {
         try {
 
             String propsLocation = System.getenv("CONFIG_LOCATION");
-            System.out.println("propsLocation is "+ propsLocation);
-           // prop.load(Application.class.getClassLoader().getResourceAsStream("deploy.properties"));
-            FileInputStream fis = new FileInputStream(propsLocation+"/deploy.properties");
+            System.out.println("propsLocation is " + propsLocation);
+            // prop.load(Application.class.getClassLoader().getResourceAsStream("deploy.properties"));
+            FileInputStream fis = new FileInputStream(propsLocation + "/deploy.properties");
             prop.load(fis);
-            System.out.println("**** properties content is "+ prop.getProperty("test"));
+            System.out.println("**** properties content is " + prop.getProperty("test"));
+
 
         } catch (IOException ioException) {
             ioException.printStackTrace();
@@ -65,9 +67,23 @@ public class Application {
 
     }
 
-    public  void printWelcome() {
+    public void readFromPropFileFromClasspath() {
+        Properties prop2 = new Properties();
+
+        try {
+            prop2.load(Application.class.getClassLoader().getResourceAsStream("deploy.properties"));
+            // ClassLoader cls=  Application.class.getClassLoader();
+
+            System.out.println("**** properties content from classloader is " + prop2.getProperty("test"));
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    public void printWelcome() {
         System.out.println("This is to check if the build is taking the new code");
-        System.out.println("****"+ env.getProperty("test"));
+        System.out.println("****" + env.getProperty("test"));
         //env.
     }
 
