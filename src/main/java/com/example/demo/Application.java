@@ -96,8 +96,8 @@ public class Application {
 
 
     public void readFromPropConfig() throws ConfigurationException {
-        PropertiesConfiguration configCustomisations = new PropertiesConfiguration("deploy.properties");
-        System.out.println("Application.readFromPropConfig: "+ configCustomisations.getString("test"));
+        PropertiesConfiguration configCustomisations = new PropertiesConfiguration("daft/deploy.properties");
+        System.out.println("Application.readFromPropConfig: ******* "+ configCustomisations.getString("test"));
     }
 
 
