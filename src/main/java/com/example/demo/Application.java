@@ -2,9 +2,12 @@ package com.example.demo;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.Arrays;
 import java.util.Properties;
 
+import org.apache.commons.configuration.ConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -14,6 +17,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration.AbstractFileConfiguration;
 
 @SpringBootApplication
 @PropertySource("file:${CONFIG_LOCATION}/deploy.properties")
@@ -38,13 +43,14 @@ public class Application {
 
             String[] beanNames = ctx.getBeanDefinitionNames();
             Arrays.sort(beanNames);
-            for (String beanName : beanNames) {
+           /* for (String beanName : beanNames) {
                 System.out.println(beanName);
-            }
+            }*/
 
             printWelcome();
-            readFromPropertiesFile();
-            readFromPropFileFromClasspath();
+          //  readFromPropertiesFile();
+            // readFromPropFileFromClasspath();
+            readFromPropConfig();
         };
     }
 
@@ -86,5 +92,13 @@ public class Application {
         System.out.println("****" + env.getProperty("test"));
         //env.
     }
+
+
+
+    public void readFromPropConfig() throws ConfigurationException {
+        PropertiesConfiguration configCustomisations = new PropertiesConfiguration("deploy.properties");
+        System.out.println("Application.readFromPropConfig: "+ configCustomisations.getString("test"));
+    }
+
 
 }
