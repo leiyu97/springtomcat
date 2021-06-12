@@ -21,11 +21,11 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.AbstractFileConfiguration;
 
 @SpringBootApplication
-@PropertySource("file:${CONFIG_LOCATION}/deploy.properties")
+//@PropertySource("file:${CONFIG_LOCATION}/deploy.properties")
 public class Application {
 
-    @Value("${CONFIG_LOCATION}")
-    private String configLocation;
+   // @Value("${CONFIG_LOCATION}")
+    //private String configLocation;
 
     @Autowired
     private Environment env;
@@ -39,7 +39,7 @@ public class Application {
         return args -> {
 
             System.out.println("Let's inspect the beans provided by Spring Boot:");
-            System.out.println("Config location: " + configLocation);
+           // System.out.println("Config location: " + configLocation);
 
             String[] beanNames = ctx.getBeanDefinitionNames();
             Arrays.sort(beanNames);
@@ -50,7 +50,7 @@ public class Application {
             printWelcome();
           //  readFromPropertiesFile();
             // readFromPropFileFromClasspath();
-            readFromPropConfig();
+           // readFromPropConfig();
         };
     }
 
@@ -89,16 +89,17 @@ public class Application {
 
     public void printWelcome() {
         System.out.println("This is to check if the build is taking the new code");
-        System.out.println("****" + env.getProperty("test"));
+        //System.out.println("****" + env.getProperty("test"));
         //env.
     }
 
 
 
     public void readFromPropConfig() throws ConfigurationException {
-        PropertiesConfiguration configCustomisations = new PropertiesConfiguration("daft/deploy.properties");
+        PropertiesConfiguration configCustomisations = new PropertiesConfiguration("deploy.properties");
         System.out.println("Application.readFromPropConfig: ******* "+ configCustomisations.getString("test"));
     }
+
 
 
 }

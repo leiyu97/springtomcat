@@ -3,6 +3,8 @@ package com.example.demo;
 
 import org.bouncycastle.util.Arrays;
 import org.bouncycastle.util.encoders.Hex;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,8 +18,10 @@ import javax.crypto.interfaces.DHPrivateKey;
 import javax.crypto.spec.DHPrivateKeySpec;
 import javax.crypto.spec.DHPublicKeySpec;
 
+
 @RestController
 public class HelloController {
+
 
     @RequestMapping("/")
     public String index() {
